@@ -79,5 +79,4 @@ A list of resources that i find helpful and would like to give credit to :
 
 ## 📝 License
 
-This project is [MIT] licensed.
-
+This project is [MIT](./LICENSE) licensed.
