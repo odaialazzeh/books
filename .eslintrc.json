@@ -11,7 +11,8 @@
     },
     "extends": ["airbnb-base"],
     "rules": {
-      "no-restricted-syntax": ["error", "FunctionExpression", "WithStatement", "BinaryExpression[operator='in']"],
+      "class-methods-use-this": ["error", { "exceptMethods": ["add","show","remove"] }],
+      "no-restricted-syntax": ["error", "WithStatement", "BinaryExpression[operator='in']"],
       "no-mixed-spaces-and-tabs": 0,
       "no-tabs": ["error", { "allowIndentationTabs": true }],
       "no-unused-vars": "off",

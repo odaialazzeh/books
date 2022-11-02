@@ -4,14 +4,22 @@ body {
   font-family: sans-serif;
 }
 
+.container {
+  border: 1px solid black;
+  width: 20em;
+  height: 100%;
+  margin: 0 auto;
+}
+
 .addBook {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 0 auto;
+  margin: 2em auto 0;
   width: 11em;
   height: 10em;
+  border-top: 3px solid black;
 }
 
 input[type=text] {
@@ -30,25 +38,47 @@ h1 {
 
 .book {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   margin: 0 auto;
-  border-bottom: 1px solid black;
-  width: 11em;
+  width: 20em;
   height: 100%;
+  height: 2.1em;
 }
 
-.book h2 {
-  margin-bottom: -0.8em;
-  font-size: 1.2em;
+.div1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin: 0;
+}
+
+.div2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin: 0;
 }
 
 .book h3 {
   font-size: 1em;
-  margin-bottom: 0.5em;
+  margin-left: 0.5em;
 }
 
 .book button {
-  margin-bottom: 1em;
+  background-color: white;
+  padding: 0.2em;
+  margin-right: 0.3em;
+  width: 6em;
+  box-shadow: 1px 2px;
+  cursor: pointer;
+}
+
+.addBook h2 {
+  text-align: center;
+  width: 15em;
+}
+
+.book:nth-child(odd) {
+  background-color: #f2f2f2;
 }
