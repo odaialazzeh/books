@@ -1,21 +1,26 @@
-class Library {
-  add() {
-    let existingEntries = JSON.parse(localStorage.getItem('collection'));
-    if (existingEntries == null) existingEntries = [];
-    const entryTitle = document.getElementById('title').value;
-    const entryOwner = document.getElementById('author').value;
-    const book = {
-      title: entryTitle,
-      author: entryOwner,
-    };
-    localStorage.setItem('book', JSON.stringify(book));
-    existingEntries.push(book);
-    localStorage.setItem('collection', JSON.stringify(existingEntries));
+/* add new book */ 
 
-    window.location.reload();
-  }
+const add = document.getElementById('add');
+add.addEventListener('click', () => {
 
-  show() {
+  let existingEntries = JSON.parse(localStorage.getItem('collection'));
+  if (existingEntries == null) existingEntries = [];
+  const entryTitle = document.getElementById('title').value;
+  const entryOwner = document.getElementById('author').value;
+  const book = {
+    title: entryTitle,
+    author: entryOwner,
+  };
+  localStorage.setItem('book', JSON.stringify(book));
+  existingEntries.push(book);
+  localStorage.setItem('collection', JSON.stringify(existingEntries));
+   document.getElementById('form').reset();
+window.location.reload();
+});
+
+
+ /* show books */ 
+
     const Data = JSON.parse(localStorage.getItem('collection'));
     if (Data) {
       const container = document.getElementById('container');
@@ -49,32 +54,42 @@ class Library {
         const list = document.querySelector('.addBook');
         list.before(container);
       }
-    }
-  }
 
-  remove() {
-    const Data = JSON.parse(localStorage.getItem('collection'));
+    }
+  
+
+ /* remove books */ 
+ 
     const idDiv = document.getElementsByTagName('button');
     const buttonPressed = (e) => {
       const elementId = e.target.id;
+      document.getElementById(elementId).style.display = 'none';
       Data.splice(elementId, 1);
       localStorage.setItem('collection', JSON.stringify(Data));
-      window.location.reload();
     };
 
     for (const button of idDiv) {
       button.addEventListener('click', (buttonPressed));
     }
-  }
-}
 
-const add = document.getElementById('add');
 
-const book = new Library();
 
-add.addEventListener('click', () => {
-  book.add();
-});
+const hide = document.getElementById('list');
 
-book.show();
-book.remove();
+hide.addEventListener('click', () => {
+ document.getElementById('container-list').style.display = 'block'
+ document.getElementById('container').style.display = 'block'
+ document.getElementById('addbook').style.display = 'none'
+
+})
+
+window.addEventListener('load', () => {
+  document.getElementById('addbook').style.display = 'none'
+})
+
+const hide1 = document.getElementById('new')
+hide1.addEventListener('click', () => {
+  document.getElementById('addbook').style.display = 'flex'
+  document.getElementById('container-list').style.display = 'none'
+  document.getElementById('container').style.display = 'none'
+})
