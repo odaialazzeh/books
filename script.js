@@ -1,57 +1,80 @@
-const collection = [];
+class Library {
+  add() {
+    let existingEntries = JSON.parse(localStorage.getItem('collection'));
+    if (existingEntries == null) existingEntries = [];
+    const entryTitle = document.getElementById('title').value;
+    const entryOwner = document.getElementById('author').value;
+    const book = {
+      title: entryTitle,
+      author: entryOwner,
+    };
+    localStorage.setItem('book', JSON.stringify(book));
+    existingEntries.push(book);
+    localStorage.setItem('collection', JSON.stringify(existingEntries));
 
-const add = document.getElementById('add');
+    window.location.reload();
+  }
 
-add.addEventListener('click', () => {
-  let existingEntries = JSON.parse(localStorage.getItem('collection'));
-  if (existingEntries == null) existingEntries = [];
-  const entryTitle = document.getElementById('title').value;
-  const entryOwner = document.getElementById('author').value;
-  const book = {
-    title: entryTitle,
-    author: entryOwner,
-  };
-  localStorage.setItem('book', JSON.stringify(book));
-  existingEntries.push(book);
-  localStorage.setItem('collection', JSON.stringify(existingEntries));
+  show() {
+    const Data = JSON.parse(localStorage.getItem('collection'));
+    if (Data) {
+      const container = document.getElementById('container');
+      for (let i = 0; i < Data.length; i += 1) {
+        const div = document.createElement('div');
+        div.className = 'book';
+        div.id = i;
+        container.appendChild(div);
 
-  window.location.reload();
-});
+        const div1 = document.createElement('div');
+        div.appendChild(div1);
+        div1.className = 'div1';
 
-const Data = JSON.parse(localStorage.getItem('collection'));
-if (Data) {
-  for (let i = 0; i < Data.length; i += 1) {
-    const div = document.createElement('div');
-    div.className = 'book';
-    div.id = i;
+        const h2 = document.createElement('h3');
+        h2.textContent = `"${Data[i].title}" by`;
+        div1.appendChild(h2);
 
-    const h2 = document.createElement('h2');
-    h2.textContent = Data[i].title;
-    div.appendChild(h2);
+        const h3 = document.createElement('h3');
+        h3.textContent = Data[i].author;
+        div1.appendChild(h3);
 
-    const h3 = document.createElement('h3');
-    h3.textContent = Data[i].author;
-    div.appendChild(h3);
+        const div2 = document.createElement('div');
+        div.appendChild(div2);
+        div2.className = 'div2';
 
-    const remove = document.createElement('button');
-    remove.id = i;
+        const remove = document.createElement('button');
+        remove.id = i;
+        remove.innerHTML = 'Remove';
+        div2.appendChild(remove);
 
-    remove.innerHTML = 'Remove';
-    div.appendChild(remove);
+        const list = document.querySelector('.addBook');
+        list.before(container);
+      }
+    }
+  }
 
-    const list = document.querySelector('.addBook');
-    list.before(div);
+  remove() {
+    const Data = JSON.parse(localStorage.getItem('collection'));
+    const idDiv = document.getElementsByTagName('button');
+    const buttonPressed = (e) => {
+      const elementId = e.target.id;
+      Data.splice(elementId, 1);
+      localStorage.setItem('collection', JSON.stringify(Data));
+      window.location.reload();
+    };
+
+    for (const button of idDiv) {
+      button.addEventListener('click', (buttonPressed));
+    }
   }
 }
 
-const idDiv = document.getElementsByTagName('button');
-const buttonPressed = (e) => {
-  const elementId = e.target.id;
-  Data.splice(elementId, 1);
-  localStorage.setItem('collection', JSON.stringify(Data));
-  window.location.reload();
-};
+const add = document.getElementById('add');
 
-for (const button of idDiv) {
-  button.addEventListener('click', (buttonPressed));
-}
+const book = new Library();
+
+add.addEventListener('click', () => {
+  book.add();
+});
+
+book.show();
+book.remove();
