@@ -13,5 +13,4 @@ const newBook = () => {
   document.getElementById('form').reset();
   window.location.reload();
 };
-/* eslint-disable */
-export { newBook };
+export { newBook as default };

@@ -7,6 +7,7 @@ const remove = () => {
     document.getElementById(elementId).style.display = 'none';
     Data.splice(elementId, 1);
     localStorage.setItem('collection', JSON.stringify(Data));
+    window.location.reload();
   };
 
   for (const button of idDiv) {
@@ -43,5 +44,4 @@ const remove = () => {
     document.getElementById('container').style.display = 'none';
   });
 };
-/* eslint-disable */
-export { remove };
+export { remove as default };

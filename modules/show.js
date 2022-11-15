@@ -35,5 +35,4 @@ const show = () => {
     }
   }
 };
-/* eslint-disable */
-export { show };
+export { show as default };
